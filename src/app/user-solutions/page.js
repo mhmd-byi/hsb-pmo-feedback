@@ -29,7 +29,7 @@ export default function UserSolutions() {
         Name: {user?.user?.name || 'user'}
       </span>
 
-      <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+      {userProblems?.problems?.length > 0 ? <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
       <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="problems"
@@ -84,7 +84,9 @@ export default function UserSolutions() {
             Submit
           </button>
         </div>
-      </form>
+      </form> : (
+        <div className="text-lg font-medium">You have not reported any issues yet</div>
+      )}
       <Toaster />
     </div>
   );
