@@ -19,9 +19,8 @@ export default async function handler(req, res) {
 
     const combinedData = {
       problems: findProblems,
-      solutions: solutions[0],
+      solutions: solutions,
     };
-
 
     res.status(200).json({ data: combinedData });
   } catch (error) {

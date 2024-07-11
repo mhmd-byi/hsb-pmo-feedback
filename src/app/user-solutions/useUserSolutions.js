@@ -27,7 +27,6 @@ export const useUserSolutions = (userId) => {
 
   const onSubmit = async (data) => {
 
-    console.log(data);
     const res = await fetch(`/api/post-solution`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

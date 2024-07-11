@@ -20,18 +20,16 @@ export default function UserObservations() {
     fetchObservations();
   }, [user]);
 
-  console.log('this is observations', observations)
   useEffect(() => {
     if (observations?.data?.problems && observations?.data?.solutions) {
-      const mappedData = observations?.data?.problems.map(problem => ({
+      const mappedData = observations.data.problems.map((problem, index) => ({
         ...problem,
-        solutions: observations?.data?.solutions.filter(sol => sol.problemId === problem._id)
+        solutions: observations.data.solutions[index] || []
       }));
       setProblemSolutions(mappedData);
     }
   }, [observations]);
 
-  console.log('this is fetch observations', problemSolutions)
 
   return (
     <div className="p-2">
