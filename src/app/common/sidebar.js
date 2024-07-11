@@ -15,6 +15,12 @@ export default function Sidebar() {
               PMO Members
             </span>
           </button>
+          <button onClick={() => router.push("/all-observations")}>
+            <span className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+              <Person3 className="mr-2" />
+              All observations
+            </span>
+          </button>
         </nav>
       </div>
     </div>
