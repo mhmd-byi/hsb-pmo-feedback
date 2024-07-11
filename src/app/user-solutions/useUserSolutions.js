@@ -7,6 +7,7 @@ export const useUserSolutions = (userId) => {
   const [userProblems, setUserProblems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit, control, reset } = useForm();
+  const [topic, setTopic] = useState('');
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -40,6 +41,15 @@ export const useUserSolutions = (userId) => {
     }
   }
 
+  const fetchTopic = async (id) => {
+    setIsLoading(true);
+    const response = await fetch(`/api/fetch-topic-by-id/${id}`);
+    const data = await response.json();
+    console.log(data?.topic);
+    setTopic(data?.topic);
+    setIsLoading(false);
+  };
+
   return {
     fetchUsers,
     user,
@@ -51,5 +61,7 @@ export const useUserSolutions = (userId) => {
     fetchUserProblems,
     userProblems,
     setUserProblems,
+    fetchTopic,
+    topic,
   };
 };

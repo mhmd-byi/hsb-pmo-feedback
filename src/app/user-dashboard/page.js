@@ -8,11 +8,15 @@ import { Toaster } from 'react-hot-toast';
 
 export default function UserDashboard() {
   const userId = localStorage.getItem('userId');
-  const { fetchUsers, user, onSubmit, control, handleSubmit } =
+  const { fetchUsers, user, onSubmit, control, handleSubmit, fetchTopic, topic } =
     useUserDashboard(userId);
   useEffect(() => {
     fetchUsers();
   }, [userId]);
+
+  useEffect(() => {
+    fetchTopic(user?.user?.topics);
+  }, [user])
 
   return (
     <div className="p-2">
@@ -22,6 +26,10 @@ export default function UserDashboard() {
 
       <span className="text-lg font-medium">
         Name: {user?.user?.name || 'user'}
+      </span>
+      <br />
+      <span className="text-lg font-medium">
+        Topic: {topic || 'general'}
       </span>
 
       {user?.user?.topics.length > 0 ? (

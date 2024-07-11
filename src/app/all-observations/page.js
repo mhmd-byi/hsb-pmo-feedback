@@ -12,7 +12,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 export default function AllObservations() {
   const userId = localStorage.getItem('userId');
-  const { fetchUsers, user, fetchObservations, observations, fetchAllUsers, allUsers, fetchParticularUser, particularUser, its } = useAllObservations(userId);
+  const { fetchUsers, user, fetchObservations, observations, fetchAllUsers, allUsers, fetchParticularUser, particularUser, its, fetchTopic, topic } = useAllObservations(userId);
   const [problemSolutions, setProblemSolutions] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
   const router = useRouter();
@@ -27,6 +27,10 @@ export default function AllObservations() {
   useEffect(() => {
     fetchObservations();
   }, [particularUser, its]);
+
+  useEffect(() => {
+    fetchTopic(user?.user?.topics)
+  }, [user])
 
   useEffect(() => {
     if (observations?.data?.problems && observations?.data?.solutions) {
@@ -50,8 +54,12 @@ export default function AllObservations() {
         User dashboard
       </h1>
 
-      <span className="text-lg font-medium">
+      <span className="text-lg font-medium mb-4">
         Name: {user?.user?.name || 'user'}
+      </span>
+      <br />
+      <span className="text-lg font-medium">
+        Topic: {topic || 'general'}
       </span>
 
       <FormControl fullWidth className="my-4">

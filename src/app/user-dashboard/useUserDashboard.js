@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 export const useUserDashboard = (userId) => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [topic, setTopic] = useState('');
   const { handleSubmit, control, reset } = useForm();
 
   const fetchUsers = async () => {
@@ -29,6 +30,15 @@ export const useUserDashboard = (userId) => {
     }
   }
 
+  const fetchTopic = async (id) => {
+    setIsLoading(true);
+    const response = await fetch(`/api/fetch-topic-by-id/${id}`);
+    const data = await response.json();
+    console.log(data?.topic);
+    setTopic(data?.topic);
+    setIsLoading(false);
+  };
+
   return {
     fetchUsers,
     user,
@@ -37,5 +47,7 @@ export const useUserDashboard = (userId) => {
     onSubmit,
     control,
     handleSubmit,
+    fetchTopic,
+    topic,
   };
 };

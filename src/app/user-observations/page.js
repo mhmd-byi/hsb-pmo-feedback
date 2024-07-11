@@ -10,7 +10,7 @@ import { useUserObservations } from './useUserObservations';
 
 export default function UserObservations() {
   const userId = localStorage.getItem('userId');
-  const { fetchUsers, user, fetchObservations, observations, } = useUserObservations(userId);
+  const { fetchUsers, user, fetchObservations, observations, fetchTopic, topic } = useUserObservations(userId);
   const [problemSolutions, setProblemSolutions] = useState([]);
   useEffect(() => {
     fetchUsers();
@@ -30,6 +30,10 @@ export default function UserObservations() {
     }
   }, [observations]);
 
+  useEffect(() => {
+    fetchTopic(user?.user?.topics);
+  }, [user])
+
 
   return (
     <div className="p-2">
@@ -39,6 +43,10 @@ export default function UserObservations() {
 
       <span className="text-lg font-medium">
         Name: {user?.user?.name || 'user'}
+      </span>
+      <br />
+      <span className="text-lg font-medium">
+        Topic: {topic || 'general'}
       </span>
 
       <div className='mt-6'>

@@ -6,6 +6,7 @@ export const useUserObservations = (userId) => {
   const [user, setUser] = useState([]);
   const [observations, setObservations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [topic, setTopic] = useState('');
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -25,6 +26,15 @@ export const useUserObservations = (userId) => {
     setIsLoading(false);
   };
 
+  const fetchTopic = async (id) => {
+    setIsLoading(true);
+    const response = await fetch(`/api/fetch-topic-by-id/${id}`);
+    const data = await response.json();
+    console.log(data?.topic);
+    setTopic(data?.topic);
+    setIsLoading(false);
+  };
+
   return {
     fetchUsers,
     user,
@@ -32,5 +42,7 @@ export const useUserObservations = (userId) => {
     fetchObservations,
     isLoading,
     setIsLoading,
+    fetchTopic,
+    topic,
   };
 };
